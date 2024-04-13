@@ -93,25 +93,7 @@ def goToPosition(x, y):
     pg.moveTo(x, y, duration = 0.1)
 
 def pressKey(name):
-<<<<<<< Updated upstream
-    pg.press(name);
-    
-def openFile(name): 
-    pg.press("win")
-    time.sleep(.2)
-    pg.typewrite(name)
-    time.sleep(.2)    
-    pg.press("enter") 
-
-def closeApp(): 
-    pg.hotkey('alt', 'f4')  
-    
-    
-def typeWord(phrase): 
-    pg.typewrite(phrase)
-=======
     pg.press(name)
->>>>>>> Stashed changes
 
 def main():
     # print(pg.position())
