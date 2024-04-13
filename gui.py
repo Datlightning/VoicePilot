@@ -66,8 +66,7 @@ def final():
 
 
 
-
-    while True:
+    while True:                                                                                                                                                 
         if speechActive:
             data = sr.getData()
             if isinstance(data, int):
@@ -77,7 +76,10 @@ def final():
                 print(data)
                 instructions = methods.get_instructions(data)
                 print(instructions)
-                methods.handleinstructions(instructions)
+                
+                extra = methods.handleinstructions(instructions)
+                if extra == "face_track":
+                    faceRec()
         window.update_idletasks()
         window.update()
 

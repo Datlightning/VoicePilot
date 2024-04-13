@@ -140,34 +140,31 @@ def handleinstructions(instructions):
                 case "write":
                     write(value)
                 case "toggle_mouse_movement":
-                    if value == "toggle":
-                        if RUNNING_FACEDETECTION:
-                            pauseFaceTrack()
-                        else:
-                            startFaceTrack()
-                    elif len(value) == 2:
+                        return "face_track"
+                case "move_mouse":
+                    if len(value) == 2:
                     
                         match value[0]:
                             case "right":
-                                moveMouse(int(value[1]), 0)
+                                moveMouse(float(value[1]), 0)
                             case "left":
-                                moveMouse(-int(value[1], 0))
+                                moveMouse(-float(value[1], 0))
                             case "up":
-                                moveMouse(0, int(value[1]))
+                                moveMouse(0, float(value[1]))
                             case "down":
-                                moveMouse(0, -int(value[1]))
+                                moveMouse(0, -float(value[1]))
                             case "top_right":
-                                val = int(value[1])/(2**(0.5))
+                                val = float(value[1])/(2**(0.5))
                                 moveMouse(val, val)
 
                             case "bottom_right":
-                                val = int(value[1])/(2**(0.5))
+                                val = float(value[1])/(2**(0.5))
                                 moveMouse(val, -val)
                             case "top_left":
-                                val = int(value[1])/(2**(0.5))
+                                val = float(value[1])/(2**(0.5))
                                 moveMouse(-val, val)
                             case "bottom_left":
-                                val = int(value[1])/(2**(0.5))
+                                val = float(value[1])/(2**(0.5))
                                 moveMouse(-val, -val)
                     RUNNING_FACEDETECTION = not RUNNING_FACEDETECTION
                 case "select_command":
@@ -218,6 +215,7 @@ def get_instructions(prompt):
         return instructions
 def main():
     setup()
-    get_instructions("Move the mouse 3 inches to the right, then open notepad, then type out hello world, then select back.")
+    moveMouse(5,0)
+    # get_instructions("Move the mouse 3 inches to the right, then open notepad, then type out hello world, then select back.")
 if __name__ == "__main__":
     main()

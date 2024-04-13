@@ -55,6 +55,7 @@ def thread():
     screenHeight = m.height
     while on:
         _, frame = cap.read()
+        face_frame = detect_face(frame)
         pyautogui.moveTo(getMovement(screenWidth, screenHeight)[0], getMovement(screenWidth, screenHeight)[1])
         # cv2.imshow("facial detection", newframe)
 
@@ -89,6 +90,8 @@ def main():
 
 if __name__ == "__main__":
     pyautogui.FAILSAFE = False
-    main()
+    start()
+    input()
+    end
     
     # test()
