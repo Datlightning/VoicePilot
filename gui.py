@@ -129,9 +129,9 @@ def final():
     window.columnconfigure(0, weight=1)
     window.rowconfigure(0, weight=1)
     
-    image = Image.open('logo.png')
-    image = ImageTk.PhotoImage(image)
-    image_label = tk.Label(window, image=image)
+    # image = Image.open('logo.png')
+    # image = ImageTk.PhotoImage(image)
+    # image_label = tk.Label(window, image=image)
     
     l1 = tk.Label(window, text = "Toggle Speech Recognition", font= ('Helvetica 15'))
     l2 = tk.Label(window, text = "Toggle Facial Recognition", font= ('Helvetica 15'))
