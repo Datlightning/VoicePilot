@@ -28,6 +28,9 @@ def final():
             b2.configure(bg = "red", text="INACTIVE", fg="white")
             window.update()
         faceToggle()
+    def exit_app():
+        window.destroy()
+        exit()
     methods.setup()
     window = tk.Tk()
     window.title("HELPER")
@@ -49,7 +52,7 @@ def final():
     b1 = tk.Button(window, text = "INACTIVE", font= ('Helvetica 15 bold'), command=speechRec, bg = "red", fg = "white", bd = 4, width = 12)
     b2 = tk.Button(window, text = "INACTIVE", font= ('Helvetica 15 bold'), command=faceRec, bg = "red", fg = "white", bd = 4, width = 12)
     
-    b3 = tk.Button(window, text = "Quit", font= ('Helvetica 15'), command=window.destroy, bd = 4)
+    b3 = tk.Button(window, text = "Quit", font= ('Helvetica 15'), command=exit_app, bd = 4)
     
     title.grid(row = 0, column = 0, rowspan = 2, columnspan = 2)
     

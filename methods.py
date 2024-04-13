@@ -117,9 +117,10 @@ def pressKey(name):
     pg.press(name)
 def openApp(name):
     pg.press("win")
-    time.sleep(0.5)
+    time.sleep(.5)
     pg.write(name, 0.01)
     pg.press("enter")
+    time.sleep(.2)
 
 def handleinstructions(instructions):
     global RUNNING_FACEDETECTION
