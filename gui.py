@@ -36,7 +36,6 @@ faceActive = False
 
 def final():
     def speechRec():
-        speechToggle()
         global speechActive 
         speechActive = not speechActive
         if speechActive:
@@ -45,8 +44,8 @@ def final():
         else:
             b1.configure(bg = "red", text="INACTIVE", fg="white")
             window.update()
+        speechToggle()
     def faceRec():
-        faceToggle()
         global faceActive
         faceActive = not faceActive
         if faceActive:
@@ -55,6 +54,7 @@ def final():
         else:
             b2.configure(bg = "red", text="INACTIVE", fg="white")
             window.update()
+        faceToggle()
     window = tk.Tk()
     window.title("HELPER")
     window.resizable(width=True, height=True)
@@ -88,10 +88,12 @@ def final():
 def speechToggle():
     # put your code here shreyas
     print("speech is toggling")
+    print(speechActive)
     
 def faceToggle():
     # put your code here vihas
     print("face is toggling")
+    print(faceActive)
 
 
 def main():
