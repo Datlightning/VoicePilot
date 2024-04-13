@@ -1,4 +1,7 @@
 SpeechRecognition
 google-generativeai
-google-colab
 pyautogui
+tk
+opencv-python
+screeninfo
+numpy
