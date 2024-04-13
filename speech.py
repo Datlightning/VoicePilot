@@ -26,7 +26,7 @@ def recognize(recognizer, microphone):
     # adjust the recognizer sensitivity to ambient noise and record audio
     # from the microphone
     with microphone as source:
-        recognizer.adjust_for_ambient_noise(source, .2)
+        recognizer.adjust_for_ambient_noise(source, .1)
         # TIMEOUT = the second param
         # time to listen = the third param: i thought that three seconds would be good. 
         audio = recognizer.listen(source, .2, 3)

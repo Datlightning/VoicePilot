@@ -64,7 +64,6 @@ def final():
 
 
 
-    window.bind('<Escape>', lambda e: window.destroy())
     while True:
         if speechActive:
             data = sr.getData()

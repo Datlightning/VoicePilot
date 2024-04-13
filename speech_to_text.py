@@ -35,7 +35,7 @@ def recognize(recognizer, microphone):
     try: 
         with microphone as source:
             recognizer.adjust_for_ambient_noise(source, .4)
-            audio = recognizer.listen(source, 0.3)
+            audio = recognizer.listen(source, 0.5)
     except: 
         return 3
     # set up the response object

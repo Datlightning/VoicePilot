@@ -133,6 +133,9 @@ def handleinstructions(instructions):
                         leftClick()
                     elif value == "right":
                         rightClick()
+                case "press":
+                    pressKey(value)
+
                 case "write":
                     write(value)
                 case "toggle_mouse_movement":
