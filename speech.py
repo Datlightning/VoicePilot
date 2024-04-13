@@ -53,7 +53,7 @@ def recognize(recognizer, microphone):
     
     return response["transcription"].lower()
 
-if __name__ == "__main__":
+def rec():
     # set the list of words, maxnumber of guesses, and prompt limit
     
     # create recognizer and mic instances
@@ -106,8 +106,8 @@ if __name__ == "__main__":
                 final = currentPhrase
                 currentPhrase = []
                 
-                print("FINAL: ", end="")
-                print(" ".join(final))
+                
+                return (" ".join(final))
                 run = False 
                 
             else: 
@@ -116,7 +116,6 @@ if __name__ == "__main__":
             print("first command not found") 
         currentPhrase = []
             
-    print("end close") 
         
         
         
