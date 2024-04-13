@@ -40,64 +40,57 @@ def final():
         global speechActive 
         speechActive = not speechActive
         if speechActive:
-            b1.configure(bg="#00FF00", text=" ACTIVE ")
+            b1.configure(bg="#00FF00", text="ACTIVE", fg="black")
             window.update()
         else:
-            b1.configure(bg = "red", text="INACTIVE")
+            b1.configure(bg = "red", text="INACTIVE", fg="white")
             window.update()
     def faceRec():
         faceToggle()
         global faceActive
         faceActive = not faceActive
         if faceActive:
-            b2.configure(bg="#00FF00", text=" ACTIVE ")
+            b2.configure(bg="#00FF00", text="ACTIVE", fg="black")
             window.update()
         else:
-            b2.configure(bg = "red", text="INACTIVE")
+            b2.configure(bg = "red", text="INACTIVE", fg="white")
             window.update()
     window = tk.Tk()
     window.title("HELPER")
     window.resizable(width=True, height=True)
-    window.geometry("450x200")
+    window.geometry("450x220")
     
-    title = Label(window, text = "HELPER", font= ('Courier 25'))
+    title = Label(window, text = "HELPER", font= ('Helvetica 25 bold'))
     
     window.columnconfigure(0, weight=1)
     window.rowconfigure(0, weight=1)
     
-    l1 = Label(window, text = "Toggle Speech Recognition", font= ('Courier 15'))
-    l2 = Label(window, text = "Toggle Facial Recognition", font= ('Courier 15'))
+    l1 = Label(window, text = "Toggle Speech Recognition", font= ('Helvetica 15'))
+    l2 = Label(window, text = "Toggle Facial Recognition", font= ('Helvetica 15'))
     
-    b1 = Button(window, text = "INACTIVE", font= ('Courier 15 bold'), command=speechRec, bg = "red")
-    b2 = Button(window, text = "INACTIVE", font= ('Courier 15 bold'), command=faceRec, bg = "red")
+    b1 = Button(window, text = "INACTIVE", font= ('Helvetica 15 bold'), command=speechRec, bg = "red", fg = "white", bd = 4, width = 12)
+    b2 = Button(window, text = "INACTIVE", font= ('Helvetica 15 bold'), command=faceRec, bg = "red", fg = "white", bd = 4, width = 12)
     
-    if (speechActive):
-        b1["bg"] = "green"
-        b1["text"] = "ACTIVE"
-        print("speech is active")
-    if (faceActive):
-        b2["bg"] = "green"
-        b2["text"] = "ACTIVE"
-        print("face is active")
-    
-    b3 = Button(window, text = "Quit", font= ('Courier 15'), command=window.destroy)
+    b3 = Button(window, text = "Quit", font= ('Helvetica 15'), command=window.destroy, bd = 4)
     
     title.grid(row = 0, column = 0, rowspan = 2, columnspan = 2)
     
     l1.grid(row = 2, column = 0, sticky = W, padx = 10, pady = 5)
     l2.grid(row = 3, column = 0, sticky = W, padx = 10, pady = 5)
     
-    b1.grid(row = 2, column = 1, sticky = E, padx = 10, pady = 5)
-    b2.grid(row = 3, column = 1, sticky = E, padx = 10, pady = 5)
+    b1.grid(row = 2, column = 1, sticky = E, padx = 10, pady = 5, rowspan = 1, columnspan = 1)
+    b2.grid(row = 3, column = 1, sticky = E, padx = 10, pady = 5, rowspan = 1, columnspan = 1)
     b3.grid(row = 4, column = 0, padx = 10, pady = 5, rowspan = 2, columnspan = 2)
     
     window.bind('<Escape>', lambda e: window.destroy())
     window.mainloop()
 
 def speechToggle():
+    # put your code here shreyas
     print("speech is toggling")
     
 def faceToggle():
+    # put your code here vihas
     print("face is toggling")
 
 
