@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import *
+from PIL import Image, ImageTk
 
 def testGrid():
     window = tk.Tk()
@@ -56,14 +57,18 @@ def final():
             window.update()
         faceToggle()
     window = tk.Tk()
-    window.title("HELPER")
-    window.resizable(width=True, height=True)
+    window.title("VoicePilot")
+    window.resizable(width=False, height=False)
     window.geometry("450x220")
     
-    title = Label(window, text = "HELPER", font= ('Helvetica 25 bold'))
+    title = Label(window, text = "VoicePilot", font= ('Helvetica 25 bold'))
     
     window.columnconfigure(0, weight=1)
     window.rowconfigure(0, weight=1)
+    
+    image = Image.open('logo.png')
+    image = ImageTk.PhotoImage(image)
+    image_label = tk.Label(window, image=image)
     
     l1 = Label(window, text = "Toggle Speech Recognition", font= ('Helvetica 15'))
     l2 = Label(window, text = "Toggle Facial Recognition", font= ('Helvetica 15'))
@@ -82,6 +87,7 @@ def final():
     b2.grid(row = 3, column = 1, sticky = E, padx = 10, pady = 5, rowspan = 1, columnspan = 1)
     b3.grid(row = 4, column = 0, padx = 10, pady = 5, rowspan = 2, columnspan = 2)
     
+    window.iconbitmap('logo.ico')
     window.bind('<Escape>', lambda e: window.destroy())
     window.mainloop()
 
