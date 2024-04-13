@@ -46,7 +46,6 @@ def detect_face(img):
     return img
 
 def getMovement(width: int, height: int) -> tuple:
-    print(target_pos)
     return ((target_pos[0]-300) * 5.5 + width//2, (target_pos[1]-272) * 7 + height//2)
 def thread():
     global on
@@ -57,8 +56,6 @@ def thread():
     while on:
         _, frame = cap.read()
         pyautogui.moveTo(getMovement(screenWidth, screenHeight)[0], getMovement(screenWidth, screenHeight)[1])
-
-        newframe = detect_face(frame)
         # cv2.imshow("facial detection", newframe)
 
     cap.release()
