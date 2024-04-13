@@ -122,7 +122,7 @@ def test():
         currentPhrase = []
             
 def main(): 
-    aiName = "jarvis" 
+    aiName = "please" 
     commandName = "command" 
     timeToSpeak = .8
     currentSentence = []
@@ -140,8 +140,8 @@ def main():
             
         if (inp == aiName): 
             print("you have twenty seconds to say what you want to say")
-            name1 = recognize(recognizer, microphone, 20).split()
-            translated = translator.generateResponse(name1) 
+            name1 = recognize(recognizer, microphone, 20)
+            print(translator.generateResponse(name1)) 
          
         #inp = "command open notepad command"
         if (inp == 1): 
