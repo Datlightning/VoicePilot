@@ -3,12 +3,11 @@ import numpy as np
 import pyautogui
 from screeninfo import get_monitors
 import time
+import threading as t
 
-detector = None
 DEBUG = False
 target_pos = (0,0)
-pyautogui.FAILSAFE = False
-click_time = 0
+on = False
 def inRange(num1: int, num2: int, max_distance: int) -> bool:
     distance: int = abs(num1 - num2)
     return max_distance > distance
@@ -48,20 +47,35 @@ def detect_face(img):
 def getMovement(width: int, height: int) -> tuple:
     print(target_pos)
     return ((target_pos[0]-300) * 5.5 + width//2, (target_pos[1]-272) * 7 + height//2)
+def thread():
+    global on
+    cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
+    while on:
+        _, frame = cap.read()
+        detect_face(frame)
+    cap.release()
+def start():
+    global on
+    on = True
+    x = t.Thread(target=thread, daemon = True)
+    x.start()
+def end():
+    global on
+    on = False
 def main():
     cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
     m = get_monitors()[0]
-    width = m.width
-    height = m.height
+    screenWidth = m.width
+    screenHeight = m.height
     cv2.namedWindow('my image')
     while True:
         ret, frame = cap.read()
         # threshold = cv2.getTrackbarPos('threshold', 'my image')
         face_frame = detect_face(frame)
         cv2.imshow("my image", face_frame)
-        # print(getMovement(width, height))
-        pyautogui.moveTo(getMovement(width, height)[0], getMovement(width, height)[1])
-    
+        print(getMovement(screenWidth, screenHeight))
+        pyautogui.moveTo(getMovement(screenWidth, screenHeight)[0], getMovement(screenWidth, screenHeight)[1])
+
         # cv2.imshow("my image", face_frame)
         if cv2.waitKey(1) & 0xFF == ord("q"):
             break
