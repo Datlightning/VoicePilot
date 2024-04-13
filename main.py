@@ -64,7 +64,7 @@ if __name__ == "__main__":
     
     # show instructions and wait 3 seconds before starting the game
     while True: 
-        print("guess") 
+        print("insert command: ") 
         guess = recognize_speech_from_mic(recognizer, microphone)
         print(guess)
 
