@@ -1,5 +1,63 @@
 import tkinter as tk
 from tkinter import *
+import random
+import time
+import methods
+import speech_recognition as sr
+import translator
+def recognize(recognizer, microphone, timetospeak):
+    """Transcribe speech from recorded from `microphone`.
+
+    Returns a dictionary with three keys:
+    "success": a boolean indicating whether or not the API request was
+               successful
+    "error":   `None` if no error occured, otherwise a string containing
+               an error message if the API could not be reached or
+               speech was unrecognizable
+    "transcription": `None` if speech could not be transcribed,
+               otherwise a string containing the transcribed text
+    """
+    # check that recognizer and microphone arguments are appropriate type
+    if not isinstance(recognizer, sr.Recognizer):
+        raise TypeError("`recognizer` must be `Recognizer` instance")
+
+    if not isinstance(microphone, sr.Microphone):
+        raise TypeError("`microphone` must be `Microphone` instance")
+
+    # adjust the recognizer sensitivity to ambient noise and record audio
+    # from the microphone
+    try: 
+        with microphone as source:
+            recognizer.adjust_for_ambient_noise(source, .4)
+            audio = recognizer.listen(source, 1.5, timetospeak)
+    except: 
+        return 3
+    # set up the response object
+    response = {
+        "success": True,
+        "error": None,
+        "transcription": ""
+    }
+
+    # try recognizing the speech in the recording
+    # if a RequestError or UnknownValueError exception is caught,
+    #     update the response object accordingly
+    try:
+        response["transcription"] = recognizer.recognize_google(audio)
+    except sr.RequestError:
+        # API was unreachable or unresponsive
+        return (1)
+        response["success"] = False
+        response["error"] = "API unavailable"
+    except sr.UnknownValueError:
+        # speech was unintelligible
+        return 2
+        response["error"] = "Unable to recognize speech"
+    
+    return response["transcription"].lower()
+
+
+
 
 def testGrid():
     window = tk.Tk()
@@ -29,7 +87,12 @@ def testGrid():
     window.protocol("WM_DELETE_WINDOW", window.destroy)
     window.bind('<Escape>', lambda e: window.destroy())
     # window.iconify() minimize window
+    
+    
     window.mainloop()
+
+        
+
 
 speechActive = False
 faceActive = False
@@ -39,10 +102,14 @@ def final():
         global speechActive 
         speechActive = not speechActive
         if speechActive:
-            b1.configure(bg="#00FF00", text="ACTIVE", fg="black")
+            b1.configure(bg="#00FF00", text="Start Talking and you talk for twenty seconds", fg="black")
+            window.update()
+            speechToggle()
+            b1.configure(bg="#00FF00", text="Stop Talking", fg="black")
             window.update()
         else:
             b1.configure(bg = "red", text="INACTIVE", fg="white")
+            
             window.update()
         speechToggle()
     def faceRec():
@@ -90,10 +157,23 @@ def speechToggle():
     print("speech is toggling")
     print(speechActive)
     
+    recognizer = sr.Recognizer()
+    try: 
+        microphone = sr.Microphone(device_index=1)
+    except: 
+        microphone = sr.Microphone()
+    name1 = recognize(recognizer, microphone, 20)
+    print(name1) 
+    if name1 != 3 and name1 != 2 and name1 != 1: 
+        
+        methods.handleinstructions(eval(translator.generateResponse(name1)))
+    
+    
 def faceToggle():
     # put your code here vihas
     print("face is toggling")
     print(faceActive)
+    
 
 
 def main():
