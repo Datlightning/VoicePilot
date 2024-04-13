@@ -1,6 +1,6 @@
 import random
 import time
-import methodsSimpleTest as methods
+import methods
 import speech_recognition as sr
 import translator
 # recognize() gets a command. function LOOPS 
@@ -141,7 +141,7 @@ def main():
         if (inp == aiName): 
             print("you have twenty seconds to say what you want to say")
             name1 = recognize(recognizer, microphone, 20)
-            print(translator.generateResponse(name1)) 
+            methods.handleInstructions(name1)
          
         #inp = "command open notepad command"
         if (inp == 1): 
