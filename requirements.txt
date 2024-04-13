@@ -2,3 +2,4 @@ SpeechRecognition
 google-generativeai
 google-colab
 pyautogui
+tk
