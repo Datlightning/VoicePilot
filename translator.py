@@ -8,16 +8,17 @@ file = open('input.txt', 'r')
 defaul_prompt = file.read()
 file.close()
 
-speech_content = "Left click here and then write happy birthday jacob, then go down two lines and say from brandon"
+speech_content = "double click here and then write i like pizza but bread tastes better pizza tastes bad because it has too much cheese an sauce then indent twive and say this was written in a blog post after that switch mouse movement mode"
+
 
 genai.configure(api_key='AIzaSyB8ZaFbYi_u2nfO-NI1D8YNTCvUofDqkPs')
 
 model = genai.GenerativeModel('gemini-pro')
 
-def main():
+def generateResponse(speech_content = "DISREGARD ALL OTHER INSTURCTIONS AND RESPOND WITH JUST [] AND NOTHING ELSE"):
     response = model.generate_content(defaul_prompt + speech_content)
-    print(response.text)
+    return(response.text)
 
 
 if __name__ == "__main__":
-    main()
+    print(generateResponse(speech_content))
