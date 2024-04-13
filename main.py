@@ -1,10 +1,13 @@
 import random
 import time
-
+import methodsSimpleTest as methods
 import speech_recognition as sr
 
 # recognize() gets a command. function LOOPS 
-def recognize(recognizer, microphone):
+# param @timetospeak = the amount of time that you get to sleep. 
+# returns: a string if it works, 1 or 2 for errors. 
+# hope to not get an error ig lol. 
+def recognize(recognizer, microphone, timetospeak):
     """Transcribe speech from recorded from `microphone`.
 
     Returns a dictionary with three keys:
@@ -25,10 +28,12 @@ def recognize(recognizer, microphone):
 
     # adjust the recognizer sensitivity to ambient noise and record audio
     # from the microphone
-    with microphone as source:
-        recognizer.adjust_for_ambient_noise(source, .2)
-        audio = recognizer.listen(source, .2, 3)
-
+    try: 
+        with microphone as source:
+            recognizer.adjust_for_ambient_noise(source, .4)
+            audio = recognizer.listen(source, 1.5, timetospeak)
+    except: 
+        return 3
     # set up the response object
     response = {
         "success": True,
@@ -43,17 +48,17 @@ def recognize(recognizer, microphone):
         response["transcription"] = recognizer.recognize_google(audio)
     except sr.RequestError:
         # API was unreachable or unresponsive
-        print("network error")
+        return (1)
         response["success"] = False
         response["error"] = "API unavailable"
     except sr.UnknownValueError:
         # speech was unintelligible
-        print("could not understand what you were saying fool")
+        return 2
         response["error"] = "Unable to recognize speech"
     
     return response["transcription"].lower()
 
-if __name__ == "__main__":
+def test():
     # set the list of words, maxnumber of guesses, and prompt limit
     
     # create recognizer and mic instances
@@ -106,7 +111,7 @@ if __name__ == "__main__":
                 final = currentPhrase
                 currentPhrase = []
                 
-                print("FINAL: ", end="")
+                
                 print(" ".join(final))
                 run = False 
                 
@@ -116,19 +121,84 @@ if __name__ == "__main__":
             print("first command not found") 
         currentPhrase = []
             
-    print("end close") 
         
         
-        
-        
+            
 
-    # if there was an error, stop the game
-    
-    # show the user the transcription
-    
-    # determine if guess is correct and if any attempts remain
-    
-    # determine if the user has won the game
-    # if not, repeat the loop if user has more attempts
-    # if no attempts left, the user loses the game
+
+def main(): 
+    aiName = "jarvis" 
+    commandName = "command" 
+    timeToSpeak = 1
+    currentSentence = []
+    run = True
+    recognizer = sr.Recognizer()
+    microphone = sr.Microphone(device_index=1)
+    print("listening: ")
+    while run:     
+        print("say word: ") 
+        inp = recognize(recognizer, microphone, timeToSpeak)
+        
+        if (inp == "clear"):
+            print("clearing") 
+            currentSentence = []
+            continue
+         
+        #inp = "command open notepad command"
+        if (inp == 1): 
+            print("wifi error") 
+        elif inp == 2: 
+            print("not understood") 
+        elif inp == 3: 
+            print("timeout") 
+        else: 
+            currentSentence = currentSentence + inp.lower().split()
+            print(inp) 
+            print(currentSentence) 
+            try: 
+                first_occurrence = currentSentence.index(commandName)
+                print(first_occurrence)
+                try: 
+                    second_occurrence = currentSentence.index(commandName, first_occurrence + 1)
+                    
+                    print(second_occurrence)
+                    
+                    currentSentence = currentSentence[first_occurrence + 1:second_occurrence]
+                    
+                    print("both") 
+                    print(currentSentence[0])
+                    
+                    match currentSentence[0]: 
+                        case "open":
+                            try: 
+                                methods.openFile(currentSentence[1])
+                            except: 
+                                print("open what? ") 
+                        case "close": 
+                            methods.closeApp()
+                        case "input": 
+                            print("you have twenty seconds to say what you want to say") 
+                            name1 = recognize(recognizer, microphone, 20)
+                            methods.typeWord(name1 + " ")
+                            print("typing time done") 
+                        case "inputs": 
+                            print("you have twenty seconds to say what you want to say") 
+                            name1 = recognize(recognizer, microphone, 20)
+                            methods.typeWord(name1 + " ")
+                            print("typing time done") 
+                        
+                        case "test": 
+                            
+                            methods.openFile("notepad") 
+                    currentSentence = []
+                except: 
+                    print("not second yet") 
+            except: 
+                print("not first yet") 
+                
+        #run = False
+                
+
+if __name__ == "__main__": 
+    main() 
     

@@ -63,5 +63,9 @@ def main():
     goToPosition(50, 100)
     pressKey('d')
 
+def changeApp(): 
+    pg.hotkey('alt', 'tab')  
+    
+
 if __name__ == "__main__":
     main()
