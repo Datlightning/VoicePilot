@@ -52,7 +52,7 @@ def moveMouse(x:float, y:float):
     dist = x * dpi
     ydist = y*dpi
     x,y = pg.position()
-    pg.moveTo(x+dist,y+ydist)
+    pg.moveRel(dist, ydist)
 
 def copy():
     pg.hotkey("ctrl", "c")
@@ -83,6 +83,7 @@ def delete():
     pg.hotkey("ctrl", "delete")
 def newtab():
     pg.hotkey("ctrl", "t")
+
 def switchbrowsertab():
     pg.hotkey("ctrl", "tab")
 def taskbarWIN():
@@ -167,6 +168,33 @@ def handleinstructions(instructions):
                                 val = float(value[1])/(2**(0.5))
                                 moveMouse(-val, -val)
                     RUNNING_FACEDETECTION = not RUNNING_FACEDETECTION
+                case "move_mouse":
+                    match value[0]:
+                            case "right":
+                                moveMouse(float(value[1]), 0)
+                                print("BEEP BEEP IM MOVING DA MOUSE")
+                            case "left":
+                                moveMouse(-1 * float(value[1]), 0)
+                                print("BEEP BEEP IM MOVING DA MOUSE")
+                            case "up":
+                                moveMouse(0, float(value[1]))
+                                print("BEEP BEEP IM MOVING DA MOUSE")
+                            case "down":
+                                moveMouse(0, -1 * float(value[1]))
+                                print("BEEP BEEP IM MOVING DA MOUSE")
+                            case "top_right":
+                                val = float(value[1])/(2**(0.5))
+                                moveMouse(val, val)
+
+                            case "bottom_right":
+                                val = int(value[1])/(2**(0.5))
+                                moveMouse(val, -val)
+                            case "top_left":
+                                val = int(value[1])/(2**(0.5))
+                                moveMouse(-val, val)
+                            case "bottom_left":
+                                val = int(value[1])/(2**(0.5))
+                                moveMouse(-val, -val)
                 case "select_command":
                     match value:
                         case "backward":
@@ -205,6 +233,7 @@ def handleinstructions(instructions):
                             switchTab() 
                         case "switch_tab": 
                             switchbrowsertab()
+                        
 
                         
                         
