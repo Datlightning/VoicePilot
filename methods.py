@@ -52,7 +52,7 @@ def moveMouse(x:float, y:float):
     dist = x * dpi
     ydist = y*dpi
     x,y = pg.position()
-    pg.moveTo(x+dist,y+ydist)
+    pg.moveRel(dist, ydist)
 
 def copy():
     pg.hotkey("ctrl", "c")
@@ -83,6 +83,7 @@ def delete():
     pg.hotkey("ctrl", "delete")
 def newtab():
     pg.hotkey("ctrl", "t")
+
 def switchbrowsertab():
     pg.hotkey("ctrl", "tab")
 def taskbarWIN():
@@ -149,15 +150,19 @@ def handleinstructions(instructions):
                     
                         match value[0]:
                             case "right":
-                                moveMouse(int(value[1]), 0)
+                                moveMouse(float(value[1]), 0)
+                                print("BEEP BEEP IM MOVING DA MOUSE")
                             case "left":
-                                moveMouse(-int(value[1], 0))
+                                moveMouse(-1 * float(value[1]), 0)
+                                print("BEEP BEEP IM MOVING DA MOUSE")
                             case "up":
-                                moveMouse(0, int(value[1]))
+                                moveMouse(0, float(value[1]))
+                                print("BEEP BEEP IM MOVING DA MOUSE")
                             case "down":
-                                moveMouse(0, -int(value[1]))
+                                moveMouse(0, -1 * float(value[1]))
+                                print("BEEP BEEP IM MOVING DA MOUSE")
                             case "top_right":
-                                val = int(value[1])/(2**(0.5))
+                                val = float(value[1])/(2**(0.5))
                                 moveMouse(val, val)
 
                             case "bottom_right":
@@ -170,6 +175,33 @@ def handleinstructions(instructions):
                                 val = int(value[1])/(2**(0.5))
                                 moveMouse(-val, -val)
                     RUNNING_FACEDETECTION = not RUNNING_FACEDETECTION
+                case "move_mouse":
+                    match value[0]:
+                            case "right":
+                                moveMouse(float(value[1]), 0)
+                                print("BEEP BEEP IM MOVING DA MOUSE")
+                            case "left":
+                                moveMouse(-1 * float(value[1]), 0)
+                                print("BEEP BEEP IM MOVING DA MOUSE")
+                            case "up":
+                                moveMouse(0, float(value[1]))
+                                print("BEEP BEEP IM MOVING DA MOUSE")
+                            case "down":
+                                moveMouse(0, -1 * float(value[1]))
+                                print("BEEP BEEP IM MOVING DA MOUSE")
+                            case "top_right":
+                                val = float(value[1])/(2**(0.5))
+                                moveMouse(val, val)
+
+                            case "bottom_right":
+                                val = int(value[1])/(2**(0.5))
+                                moveMouse(val, -val)
+                            case "top_left":
+                                val = int(value[1])/(2**(0.5))
+                                moveMouse(-val, val)
+                            case "bottom_left":
+                                val = int(value[1])/(2**(0.5))
+                                moveMouse(-val, -val)
                 case "select_command":
                     match value:
                         case "backward":
@@ -208,6 +240,7 @@ def handleinstructions(instructions):
                             switchTab() 
                         case "switch_tab": 
                             switchbrowsertab()
+                        
 
                         
                         
@@ -217,7 +250,6 @@ def get_instructions(prompt):
         instructions = translator.generateResponse(prompt)
         return instructions
 def main():
-    setup()
-    get_instructions("Move the mouse 3 inches to the right, then open notepad, then type out hello world, then select back.")
+    moveMouse(1.0, 2.0)
 if __name__ == "__main__":
     main()
