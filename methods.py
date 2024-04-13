@@ -83,6 +83,18 @@ def delete():
     pg.hotkey("ctrl", "delete")
 def newtab():
     pg.hotkey("ctrl", "t")
+def switchbrowsertab():
+    pg.hotkey("ctrl", "tab")
+def taskbarWIN():
+    pg.hotkey("win", "t")
+def screenshot(): 
+    pg.hotkey("win", "shift", "s")
+def calendarToggle11(): 
+    pg.hotkey("win",  "n")
+def openAccessibilitySettings(): 
+    pg.hotkey("win",  "u")
+def switchTab(): 
+    pg.hotkey("alt",  "tab")
 def close():
     pg.hotkey("alt", "f4")
 def leftClick():
@@ -164,6 +176,11 @@ def handleinstructions(instructions):
                             close()
                         case "cut":
                             cut()
+                        case "switch_window":
+                            switchTab() 
+                        case "switch_tab": 
+                            switchbrowsertab()
+
                         
                         
 
