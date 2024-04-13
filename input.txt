@@ -18,4 +18,6 @@ You are only allowed to say the following methods in translating the human speec
 
 "open" : "application_name" where application name is the name of the application. For example "open notepad" will translate to [{"open" : "notepad"}]
 
+"switch_window" : "" where if the user asks to switch the window, or switch application or alt tab your respond this command. For example, "switch the window" translates to [{"switch_window": ""}]
+
 Here is the human speech you have to translate: 
