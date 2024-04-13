@@ -1,22 +1,16 @@
-from importlib.util import decode_source
-from tkinter import Menu
 import pyautogui as pg
 import time
-<<<<<<< Updated upstream
 import os
-=======
 import facetrack
-from screeninfo import get_monitors
 from PyQt5.QtWidgets import QApplication
 import sys
->>>>>>> Stashed changes
-
 # mouseInfo = pg.position()
 # print(mouseInfo)
 
 #FUNCTIONS returns current mouse position, takes you to particular position, left and right click, keyboard input
 # open app, 
 pg.FAILSAFE = False
+RUNNING_FACEDETECTION = False
 def setup():
     global screenHeight, screenWidth, dpi
     screenWidth, screenHeight = pg.size() 
@@ -24,9 +18,11 @@ def setup():
     screen = app.screens()[0]
     dpi = screen.physicalDotsPerInch()
 def startFaceTrack():
+    RUNNING_FACEDETECTION = True
     facetrack.start()
 
 def pauseFaceTrack():
+    RUNNING_FACEDETECTION = False
     facetrack.end()
 
 def moveToFace():
@@ -94,14 +90,36 @@ def goToPosition(x, y):
 
 def pressKey(name):
     pg.press(name)
+def openApp(name):
+    pg.press("win")
+    time.sleep(0.5)
+    pg.write(name, 0.01)
+    pg.press("enter")
+
+def handleinstructions(instructions):
+    global RUNNING_FACEDETECTION
+    for dict in instructions:
+        for key, value in dict.items():
+            match key:
+                case "click":
+                    if value == "double":
+                        doubleClick()
+                    elif value == "left":
+                        leftClick()
+                    elif value == "right":
+                        rightClick()
+                case "write":
+                    write(value)
+                case "toggle_mouse_movement":
+                    if RUNNING_FACEDETECTION:
+                        pauseFaceTrack()
+                    else:
+                        startFaceTrack()
+                    RUNNING_FACEDETECTION = not RUNNING_FACEDETECTION
 
 def main():
-    # print(pg.position())
-    # print(getCurrentMousePos())
-    # pg.alert('this is an alert')
-    # pg.moveTo(100, 150, duration = 0.5)
     setup()
-    moveMouse(2)
+    openApp("google")
 
 if __name__ == "__main__":
     main()
