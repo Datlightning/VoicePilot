@@ -2,6 +2,7 @@ SpeechRecognition
 google-generativeai
 pyautogui
 tk
+pyaudio
 opencv-python
 screeninfo
 numpy

@@ -8,6 +8,7 @@ import threading as t
 DEBUG = False
 target_pos = (0,0)
 on = False
+
 def inRange(num1: int, num2: int, max_distance: int) -> bool:
     distance: int = abs(num1 - num2)
     return max_distance > distance
@@ -39,7 +40,7 @@ def detect_face(img):
     y, h = big_face[0]
     x, w = big_face[1]
     if len(faces) > 0:
-        target_pos = ((x + x + w)/2, (y + y + h)/2)
+        target_pos = ((x + x + w)/2 * .60 + target_pos[0] * .40, (y + y + h)/2 * .60 + target_pos[1] * .40)
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 255, 0), 2)
 
     return img
@@ -50,9 +51,16 @@ def getMovement(width: int, height: int) -> tuple:
 def thread():
     global on
     cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
+    m = get_monitors()[0]
+    screenWidth = m.width
+    screenHeight = m.height
     while on:
         _, frame = cap.read()
-        detect_face(frame)
+        pyautogui.moveTo(getMovement(screenWidth, screenHeight)[0], getMovement(screenWidth, screenHeight)[1])
+
+        newframe = detect_face(frame)
+        # cv2.imshow("facial detection", newframe)
+
     cap.release()
 def start():
     global on
@@ -73,7 +81,7 @@ def main():
         # threshold = cv2.getTrackbarPos('threshold', 'my image')
         face_frame = detect_face(frame)
         cv2.imshow("my image", face_frame)
-        print(getMovement(screenWidth, screenHeight))
+        # print(getMovement(screenWidth, screenHeight))
         pyautogui.moveTo(getMovement(screenWidth, screenHeight)[0], getMovement(screenWidth, screenHeight)[1])
 
         # cv2.imshow("my image", face_frame)
@@ -83,7 +91,7 @@ def main():
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-   
+    pyautogui.FAILSAFE = False
     main()
     
     # test()
