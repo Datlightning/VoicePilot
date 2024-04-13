@@ -65,16 +65,17 @@ def end():
 def main():
     cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
     m = get_monitors()[0]
-    width = m.width
-    height = m.height
+    screenWidth = m.width
+    screenHeight = m.height
     cv2.namedWindow('my image')
     while True:
         ret, frame = cap.read()
         # threshold = cv2.getTrackbarPos('threshold', 'my image')
         face_frame = detect_face(frame)
         cv2.imshow("my image", face_frame)
-        # print(getMovement(width, height))
-    
+        print(getMovement(screenWidth, screenHeight))
+        pyautogui.moveTo(getMovement(screenWidth, screenHeight)[0], getMovement(screenWidth, screenHeight)[1])
+
         # cv2.imshow("my image", face_frame)
         if cv2.waitKey(1) & 0xFF == ord("q"):
             break
