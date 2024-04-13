@@ -2,7 +2,7 @@ import random
 import time
 import methodsSimpleTest as methods
 import speech_recognition as sr
-
+import translator
 # recognize() gets a command. function LOOPS 
 # param @timetospeak = the amount of time that you get to sleep. 
 # returns: a string if it works, 1 or 2 for errors. 
@@ -121,15 +121,10 @@ def test():
             print("first command not found") 
         currentPhrase = []
             
-        
-        
-            
-
-
 def main(): 
     aiName = "jarvis" 
     commandName = "command" 
-    timeToSpeak = 1
+    timeToSpeak = .8
     currentSentence = []
     run = True
     recognizer = sr.Recognizer()
@@ -138,11 +133,15 @@ def main():
     while run:     
         print("say word: ") 
         inp = recognize(recognizer, microphone, timeToSpeak)
-        
         if (inp == "clear"):
             print("clearing") 
             currentSentence = []
             continue
+            
+        if (inp == aiName): 
+            print("you have twenty seconds to say what you want to say")
+            name1 = recognize(recognizer, microphone, 20).split()
+            translated = translator.generateResponse(name1) 
          
         #inp = "command open notepad command"
         if (inp == 1): 
@@ -183,9 +182,11 @@ def main():
                             print("typing time done") 
                         case "inputs": 
                             print("you have twenty seconds to say what you want to say") 
-                            name1 = recognize(recognizer, microphone, 20)
-                            methods.typeWord(name1 + " ")
+                            name1 = recognize(recognizer, microphone, 20).split()
+                            for word in name1: 
+                                methods.typeWord(word + " ")
                             print("typing time done") 
+                        
                         
                         case "test": 
                             
