@@ -4,6 +4,7 @@ import os
 import facetrack
 from PyQt5.QtWidgets import QApplication
 import sys
+import translator
 # mouseInfo = pg.position()
 # print(mouseInfo)
 
@@ -59,21 +60,33 @@ def paste():
     pg.hotkey("ctrl", "v")
 def undo():
     pg.hotkey("ctrl", "z")
-def goback():
+
+def gobackhighlight():
     pg.hotkey("ctrl","shift", "left")    
-def goforward():
+def goforwardhighlight():
     pg.hotkey("ctrl","shift", "right") 
+def goback():
+    pg.hotkey("ctrl", "left")    
+def goforward():
+    pg.hotkey("ctrl","right") 
 def bold():
     pg.hotkey("ctrl","b")   
+def underline():
+    pg.hotkey("ctrl","u")   
+def ital():
+    pg.hotkey("ctrl","i")  
+def cut():
+    pg.hotkey("ctrl", "x") 
+def selectall():
+    pg.hotkey("ctrl","a")   
 def delete():
     pg.hotkey("ctrl", "delete")
 def newtab():
     pg.hotkey("ctrl", "t")
+def close():
+    pg.hotkey("alt", "f4")
 def leftClick():
     pg.click()
-
-def leftClick(x, y):
-    pg.click(x, y, duration = 0.1)
 def doubleClick():
     pg.doubleClick()
 def rightClick():
@@ -111,15 +124,54 @@ def handleinstructions(instructions):
                 case "write":
                     write(value)
                 case "toggle_mouse_movement":
-                    if RUNNING_FACEDETECTION:
-                        pauseFaceTrack()
-                    else:
-                        startFaceTrack()
+                    if value == "toggle":
+                        if RUNNING_FACEDETECTION:
+                            pauseFaceTrack()
+                        else:
+                            startFaceTrack()
+                    elif value == "measure":
+                        moveMouse(0)
                     RUNNING_FACEDETECTION = not RUNNING_FACEDETECTION
+                case "select_command":
+                    match value:
+                        case "backward":
+                            gobackhighlight()
+                        case "forward":
+                            goforwardhighlight()
+                case "command":
+                    match value:
+                        case "new_tab":
+                            newtab()
+                        case "copy":
+                            copy()
+                        case "paste":
+                            paste()
+                        case "bold":
+                            bold()
+                        case "italicize":
+                            ital()
+                        case "underline":
+                            underline()
+                        case "forward_word":
+                            goforward()
+                        case "back_word":
+                            goback()
+                        case "all":
+                            selectall()
+                        case "undo":
+                            undo()
+                        case "close":
+                            close()
+                        case "cut":
+                            cut()
+                        
+                        
 
+def get_instructions(prompt):
+        instructions = translator.generateResponse(prompt)
+        print(instructions)
 def main():
     setup()
-    openApp("google")
-
+    get_instructions("Move the mouse 3 inches to the right, then open notepad, then type out hello world, then select back.")
 if __name__ == "__main__":
     main()

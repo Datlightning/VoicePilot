@@ -5,5 +5,5 @@ tk
 opencv-python
 screeninfo
 numpy
-threading
+thread
 PyQt5
