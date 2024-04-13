@@ -1,6 +1,5 @@
 import pyautogui as pg
 import time
-import os
 import facetrack
 from PyQt5.QtWidgets import QApplication
 import sys
@@ -169,8 +168,7 @@ def handleinstructions(instructions):
 
 def get_instructions(prompt):
         instructions = translator.generateResponse(prompt)
-        print(instructions)
-        print(instructions[0])
+        return instructions
 def main():
     setup()
     get_instructions("Move the mouse 3 inches to the right, then open notepad, then type out hello world, then select back.")

@@ -58,7 +58,9 @@ def thread():
         _, frame = cap.read()
         pyautogui.moveTo(getMovement(screenWidth, screenHeight)[0], getMovement(screenWidth, screenHeight)[1])
 
-        detect_face(frame)
+        newframe = detect_face(frame)
+        cv2.imshow("facial detection", newframe)
+
     cap.release()
 def start():
     global on

@@ -15,7 +15,7 @@ genai.configure(api_key='AIzaSyB8ZaFbYi_u2nfO-NI1D8YNTCvUofDqkPs')
 
 model = genai.GenerativeModel('gemini-pro')
 
-def generateResponse(speech_content = "DISREGARD ALL OTHER INSTURCTIONS AND RESPOND WITH JUST [] AND NOTHING ELSE"):
+def generateResponse(speech_content = "DISREGARD ALL OTHER INSTRUCTIONS AND RESPOND WITH JUST [] AND NOTHING ELSE"):
     response = model.generate_content(default_prompt + speech_content)
     return(eval(response.text))
 

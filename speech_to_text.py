@@ -1,13 +1,17 @@
 import random
+import re
 import time
 import methods
 import speech_recognition as sr
 import translator
+import threading as t
 # recognize() gets a command. function LOOPS 
 # param @timetospeak = the amount of time that you get to sleep. 
 # returns: a string if it works, 1 or 2 for errors. 
 # hope to not get an error ig lol. 
-def recognize(recognizer, microphone, timetospeak):
+data = []
+addition = False
+def recognize(recognizer, microphone):
     """Transcribe speech from recorded from `microphone`.
 
     Returns a dictionary with three keys:
@@ -31,7 +35,7 @@ def recognize(recognizer, microphone, timetospeak):
     try: 
         with microphone as source:
             recognizer.adjust_for_ambient_noise(source, .4)
-            audio = recognizer.listen(source, 1.5, timetospeak)
+            audio = recognizer.listen(source)
     except: 
         return 3
     # set up the response object
@@ -57,7 +61,32 @@ def recognize(recognizer, microphone, timetospeak):
         response["error"] = "Unable to recognize speech"
     
     return response["transcription"].lower()
-
+def getData():
+    global data
+    global addition
+    if data:
+        addition = False
+        return data.pop(0)
+    
+def getChange():
+    global addition
+    return addition
+def listen():
+    global data
+    global addition
+    recognizer = sr.Recognizer()
+    microphone = sr.Microphone(device_index=0)
+    while on:
+        data.append(recognize(recognizer=recognizer, microphone=microphone))
+        addition = True
+def start():
+    global on
+    on = True
+    x = t.Thread(target=listen, daemon = True)
+    x.start()
+def end():
+    global on
+    on = False
 def test():
     # set the list of words, maxnumber of guesses, and prompt limit
     
@@ -201,5 +230,5 @@ def main():
                 
 
 if __name__ == "__main__": 
-    main() 
+    main()
     

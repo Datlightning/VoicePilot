@@ -1,94 +1,7 @@
 import tkinter as tk
-import methods
-import speech_recognition as sr
-import translator
-def recognize(recognizer, microphone, timetospeak):
-    """Transcribe speech from recorded from `microphone`.
-
-    Returns a dictionary with three keys:
-    "success": a boolean indicating whether or not the API request was
-               successful
-    "error":   `None` if no error occured, otherwise a string containing
-               an error message if the API could not be reached or
-               speech was unrecognizable
-    "transcription": `None` if speech could not be transcribed,
-               otherwise a string containing the transcribed text
-    """
-    # check that recognizer and microphone arguments are appropriate type
-    if not isinstance(recognizer, sr.Recognizer):
-        raise TypeError("`recognizer` must be `Recognizer` instance")
-
-    if not isinstance(microphone, sr.Microphone):
-        raise TypeError("`microphone` must be `Microphone` instance")
-
-    # adjust the recognizer sensitivity to ambient noise and record audio
-    # from the microphone
-    try: 
-        with microphone as source:
-            recognizer.adjust_for_ambient_noise(source, .4)
-            audio = recognizer.listen(source, 1.5, timetospeak)
-    except: 
-        return 3
-    # set up the response object
-    response = {
-        "success": True,
-        "error": None,
-        "transcription": ""
-    }
-
-    # try recognizing the speech in the recording
-    # if a RequestError or UnknownValueError exception is caught,
-    #     update the response object accordingly
-    try:
-        response["transcription"] = recognizer.recognize_google(audio)
-    except sr.RequestError:
-        # API was unreachable or unresponsive
-        return (1)
-        response["success"] = False
-        response["error"] = "API unavailable"
-    except sr.UnknownValueError:
-        # speech was unintelligible
-        return 2
-        response["error"] = "Unable to recognize speech"
-    
-    return response["transcription"].lower()
-
-
-
-
-def testGrid():
-    window = tk.Tk()
-    window.title("[INSERT NAME]")
-    window.resizable(width=True, height=True)
-    #Set the geometry of tkinter frame
-    window.geometry("250x750")
-    
-    for i in range(3):
-        window.columnconfigure(i, weight=1, minsize=75)
-        window.rowconfigure(i, weight=1, minsize=50)
-        
-        for j in range(3):
-            frame = tk.Frame(
-                master=window,
-                relief=tk.RAISED,
-                borderwidth=4
-            )
-            frame.grid(row=i, column=j)
-            if (i == 0 and j == 1):
-                label1= tk.Label(master=frame, text="Hello There!", font= ('Courier 20 underline'))
-                label1.pack()
-            else:
-                label = tk.Label(master=frame, text=f"Row {i}\nColumn {j}")
-                label.pack(padx = 5, pady = 5)
-    
-    window.protocol("WM_DELETE_WINDOW", window.destroy)
-    window.bind('<Escape>', lambda e: window.destroy())
-    # window.iconify() minimize window
-    
-    
-    window.mainloop()
-
-        
+import methods as methods
+import speech_to_text as sr
+import translator as trans
 
 
 speechActive = False
@@ -99,14 +12,10 @@ def final():
         global speechActive 
         speechActive = not speechActive
         if speechActive:
-            b1.configure(bg="#00FF00", text="Start Talking and you talk for twenty seconds", fg="black")
-            window.update()
-            speechToggle()
-            b1.configure(bg="#00FF00", text="Stop Talking", fg="black")
+            b1.configure(bg="#00FF00", text="ACTIVE", fg="black")
             window.update()
         else:
             b1.configure(bg = "red", text="INACTIVE", fg="white")
-            
             window.update()
         speechToggle()
     def faceRec():
@@ -119,6 +28,7 @@ def final():
             b2.configure(bg = "red", text="INACTIVE", fg="white")
             window.update()
         faceToggle()
+    methods.setup()
     window = tk.Tk()
     window.title("HELPER")
     window.resizable(width=True, height=True)
@@ -129,9 +39,7 @@ def final():
     window.columnconfigure(0, weight=1)
     window.rowconfigure(0, weight=1)
     
-    image = Image.open('logo.png')
-    image = ImageTk.PhotoImage(image)
-    image_label = tk.Label(window, image=image)
+    # image_label = tk.Label(window, image=image)
     
     l1 = tk.Label(window, text = "Toggle Speech Recognition", font= ('Helvetica 15'))
     l2 = tk.Label(window, text = "Toggle Facial Recognition", font= ('Helvetica 15'))
@@ -150,24 +58,30 @@ def final():
     b2.grid(row = 3, column = 1, sticky = tk.E, padx = 10, pady = 5, rowspan = 1, columnspan = 1)
     b3.grid(row = 4, column = 0, padx = 10, pady = 5, rowspan = 2, columnspan = 2)
     window.iconbitmap('logo.ico')
+
+
+
+
     window.bind('<Escape>', lambda e: window.destroy())
-    window.mainloop()
+    while True:
+        if speechActive:
+            data = sr.getData()
+            if isinstance(data, int):
+                pass
+            elif data:
+                print(data)
+                instructions = methods.get_instructions(data)
+                print(instructions)
+                methods.handleinstructions(instructions)
+        window.update_idletasks()
+        window.update()
 
 def speechToggle():
     # put your code here shreyas
-    print("speech is toggling")
-    print(speechActive)
-    
-    recognizer = sr.Recognizer()
-    try: 
-        microphone = sr.Microphone(device_index=1)
-    except: 
-        microphone = sr.Microphone()
-    name1 = recognize(recognizer, microphone, 20)
-    print(name1) 
-    if name1 != 3 and name1 != 2 and name1 != 1: 
-        
-        methods.handleinstructions(eval(translator.generateResponse(name1)))
+    if speechActive:
+        sr.start()
+    else:
+        sr.end()
     
     
 def faceToggle():
