@@ -8,7 +8,7 @@ file = open('input.txt', 'r')
 default_prompt = file.read()
 file.close()
 
-speech_content = "open notepad write"
+speech_content = "create a new tab"
 
 
 genai.configure(api_key='AIzaSyB8ZaFbYi_u2nfO-NI1D8YNTCvUofDqkPs')
