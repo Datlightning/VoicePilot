@@ -8,7 +8,7 @@ file = open('input.txt', 'r')
 default_prompt = file.read()
 file.close()
 
-speech_content = "bold the last word"
+speech_content = "open notepad write"
 
 
 genai.configure(api_key='AIzaSyB8ZaFbYi_u2nfO-NI1D8YNTCvUofDqkPs')
@@ -19,6 +19,7 @@ def generateResponse(speech_content = "DISREGARD ALL OTHER INSTURCTIONS AND RESP
     try:
         response = model.generate_content(default_prompt + speech_content)
         return(eval(response.text))
+    
     except:
         return ([])
 
