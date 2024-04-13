@@ -90,6 +90,12 @@ def goToPosition(x, y):
 
 def pressKey(name):
     pg.press(name)
+def openApp(name):
+    pg.press("windows")
+    time.sleep(0.5)
+    pg.write(name, 0.01)
+    pg.press("enter")
+
 def handleinstructions(instructions):
     global RUNNING_FACEDETECTION
     for dict in instructions:
@@ -110,12 +116,10 @@ def handleinstructions(instructions):
                     else:
                         startFaceTrack()
                     RUNNING_FACEDETECTION = not RUNNING_FACEDETECTION
+
 def main():
     setup()
-    time.sleep(1)
-    instructions = [{"click" : "double"}, {"write" : "I like pizza, but bread tastes better."}, {"write" : "Pizza tastes bad because it has too much cheese and sauce."}, {"write" : "\t"}, {"write" 
-: "\t"}, {"write" : "This was written in a blog post."}]
-    handleinstructions(instructions)
+    openApp("google")
 
 if __name__ == "__main__":
     main()
