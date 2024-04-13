@@ -1,1 +1,3 @@
 SpeechRecognition
+google-generativeai
+google-colab
