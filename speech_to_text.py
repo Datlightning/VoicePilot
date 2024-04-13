@@ -1,6 +1,7 @@
 import random
 import re
 import time
+from unittest import skip
 import methods
 import speech_recognition as sr
 import translator
@@ -11,7 +12,9 @@ import threading as t
 # hope to not get an error ig lol. 
 data = []
 addition = False
+skipRecalibrate = False
 def recognize(recognizer, microphone):
+    global skipRecalibrate
     """Transcribe speech from recorded from `microphone`.
 
     Returns a dictionary with three keys:
@@ -34,9 +37,11 @@ def recognize(recognizer, microphone):
     # from the microphone
     try: 
         with microphone as source:
-            recognizer.adjust_for_ambient_noise(source, .4)
+            if (not skipRecalibrate):
+                recognizer.adjust_for_ambient_noise(source, .4)
             audio = recognizer.listen(source, 0.5)
     except: 
+        skipRecalibrate = True
         return 3
     # set up the response object
     response = {

@@ -80,7 +80,7 @@ def cut():
 def selectall():
     pg.hotkey("ctrl","a")   
 def delete():
-    pg.hotkey("ctrl", "delete")
+    pg.hotkey("ctrl", "backspace")
 def newtab():
     pg.hotkey("ctrl", "t")
 
