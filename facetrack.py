@@ -59,7 +59,7 @@ def thread():
         pyautogui.moveTo(getMovement(screenWidth, screenHeight)[0], getMovement(screenWidth, screenHeight)[1])
 
         newframe = detect_face(frame)
-        cv2.imshow("facial detection", newframe)
+        # cv2.imshow("facial detection", newframe)
 
     cap.release()
 def start():
@@ -81,7 +81,7 @@ def main():
         # threshold = cv2.getTrackbarPos('threshold', 'my image')
         face_frame = detect_face(frame)
         cv2.imshow("my image", face_frame)
-        print(getMovement(screenWidth, screenHeight))
+        # print(getMovement(screenWidth, screenHeight))
         pyautogui.moveTo(getMovement(screenWidth, screenHeight)[0], getMovement(screenWidth, screenHeight)[1])
 
         # cv2.imshow("my image", face_frame)

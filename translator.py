@@ -8,7 +8,7 @@ file = open('input.txt', 'r')
 default_prompt = file.read()
 file.close()
 
-speech_content = "double click here and then write i like pizza but bread tastes better pizza tastes bad because it has too much cheese an sauce then indent twive and say this was written in a blog post after that switch mouse movement mode control a and then select last two words and then paste it"
+speech_content = "move the mouse 5 inches to the top right"
 
 
 genai.configure(api_key='AIzaSyB8ZaFbYi_u2nfO-NI1D8YNTCvUofDqkPs')

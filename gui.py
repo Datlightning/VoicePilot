@@ -69,6 +69,7 @@ def final():
         if speechActive:
             data = sr.getData()
             if isinstance(data, int):
+                print(data)
                 pass
             elif data:
                 print(data)

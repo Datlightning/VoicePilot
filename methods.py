@@ -47,11 +47,12 @@ def write(string: str):
         for s in tabs:
             pg.write(s, 0.01)
             pg.press("tab")
-def moveMouse(inch:float):
+def moveMouse(x:float, y:float):
     global dpi
-    dist = inch * dpi
+    dist = x * dpi
+    ydist = y*dpi
     x,y = pg.position()
-    pg.moveTo(x+dist,y)
+    pg.moveTo(x+dist,y+ydist)
 
 def copy():
     pg.hotkey("ctrl", "c")
@@ -128,8 +129,30 @@ def handleinstructions(instructions):
                             pauseFaceTrack()
                         else:
                             startFaceTrack()
-                    elif value == "measure":
-                        moveMouse(0)
+                    elif len(value) == 2:
+                    
+                        match value[0]:
+                            case "right":
+                                moveMouse(int(value[1]), 0)
+                            case "left":
+                                moveMouse(-int(value[1], 0))
+                            case "up":
+                                moveMouse(0, int(value[1]))
+                            case "down":
+                                moveMouse(0, -int(value[1]))
+                            case "top_right":
+                                val = int(value[1])/(2**(0.5))
+                                moveMouse(val, val)
+
+                            case "bottom_right":
+                                val = int(value[1])/(2**(0.5))
+                                moveMouse(val, -val)
+                            case "top_left":
+                                val = int(value[1])/(2**(0.5))
+                                moveMouse(-val, val)
+                            case "bottom_left":
+                                val = int(value[1])/(2**(0.5))
+                                moveMouse(-val, -val)
                     RUNNING_FACEDETECTION = not RUNNING_FACEDETECTION
                 case "select_command":
                     match value:
@@ -137,6 +160,8 @@ def handleinstructions(instructions):
                             gobackhighlight()
                         case "forward":
                             goforwardhighlight()
+                case "open":
+                    openApp(value)
                 case "command":
                     match value:
                         case "new_tab":
@@ -163,6 +188,7 @@ def handleinstructions(instructions):
                             close()
                         case "cut":
                             cut()
+                        
                         
                         
 
