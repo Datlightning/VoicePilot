@@ -91,7 +91,7 @@ def goToPosition(x, y):
 def pressKey(name):
     pg.press(name)
 def openApp(name):
-    pg.press("windows")
+    pg.press("win")
     time.sleep(0.5)
     pg.write(name, 0.01)
     pg.press("enter")
