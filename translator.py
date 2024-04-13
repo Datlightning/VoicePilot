@@ -17,7 +17,7 @@ model = genai.GenerativeModel('gemini-pro')
 
 def generateResponse(speech_content = "DISREGARD ALL OTHER INSTURCTIONS AND RESPOND WITH JUST [] AND NOTHING ELSE"):
     response = model.generate_content(defaul_prompt + speech_content)
-    return(response.text)
+    return eval(response.text)
 
 
 if __name__ == "__main__":
