@@ -4,7 +4,7 @@
 
 ### PLACEMENT: 1st PLACE HEALTHCARE CATEGORY  
 
-Python Application that uses speech recognition, Gemini LLM API and Facial recognition through openCV to allow users to interact with their computer by just moving their face and speaking. 
+Python Application that uses speech recognition, Gemini LLM API and Facial recognition through openCV to allow users to interact with their computer by just moving their face and speaking naturally. 
 
 **KEY FEATURES**
 - Can move mouse by moving face.
