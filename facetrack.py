@@ -90,8 +90,6 @@ def main():
 
 if __name__ == "__main__":
     pyautogui.FAILSAFE = False
-    start()
-    input()
-    end
+    main()
     
     # test()

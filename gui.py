@@ -1,7 +1,6 @@
 import tkinter as tk
 import methods as methods
 import speech_to_text as sr
-import translator as trans
 
 
 speechActive = False

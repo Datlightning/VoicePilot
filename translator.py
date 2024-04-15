@@ -8,7 +8,7 @@ file = open('input.txt', 'r')
 default_prompt = file.read()
 file.close()
 
-speech_content = "move the mouse write 3 inches"
+speech_content = "move the mouse right 3 inches"
 
 
 genai.configure(api_key='AIzaSyB8ZaFbYi_u2nfO-NI1D8YNTCvUofDqkPs')

@@ -39,7 +39,8 @@ def recognize(recognizer, microphone):
         with microphone as source:
             if (not skipRecalibrate):
                 recognizer.adjust_for_ambient_noise(source, .4)
-            audio = recognizer.listen(source, 0.5)
+            audio = recognizer.listen(source, 0.5, phrase_time_limit=4)
+            
     except: 
         skipRecalibrate = True
         return 3
@@ -162,11 +163,11 @@ def main():
     currentSentence = []
     run = True
     recognizer = sr.Recognizer()
-    microphone = sr.Microphone(device_index=1)
+    microphone = sr.Microphone(device_index=2)
     print("listening: ")
     while run:     
         print("say word: ") 
-        inp = recognize(recognizer, microphone, timeToSpeak)
+        inp = recognize(recognizer, microphone)
         if (inp == "clear"):
             print("clearing") 
             currentSentence = []

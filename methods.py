@@ -149,7 +149,7 @@ def handleinstructions(instructions):
                             case "right":
                                 moveMouse(float(value[1]), 0)
                             case "left":
-                                moveMouse(-float(value[1], 0))
+                                moveMouse(-float(value[1]), 0)
                             case "up":
                                 moveMouse(0, float(value[1]))
                             case "down":
