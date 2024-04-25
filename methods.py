@@ -4,12 +4,40 @@ import facetrack
 from PyQt5.QtWidgets import QApplication
 import sys
 import translator
+import pyaudio
+import cv2
 # mouseInfo = pg.position()
 # print(mouseInfo)
 
 #FUNCTIONS returns current mouse position, takes you to particular position, left and right click, keyboard input
 # open app, 
 pg.FAILSAFE = False
+def get_available_microphones():
+    """
+    Function to get a list of available microphones.
+    """
+    p = pyaudio.PyAudio()
+    info = p.get_host_api_info_by_index(0)
+    num_devices = info.get('deviceCount')
+    devices = []
+    for i in range(num_devices):
+        device_info = p.get_device_info_by_host_api_device_index(0, i)
+        devices.append(device_info['name'])
+    p.terminate()
+    return devices
+def get_available_cameras():
+    cameras = []
+    for i in range(10):  # assuming maximum 10 cameras
+        cap = cv2.VideoCapture(i, cv2.CAP_DSHOW)
+        if not cap.isOpened():
+            break
+        ret, _ = cap.read()
+        if ret:
+            cameras.append({"index": i, "device_name": f"Camera {i}"})
+        cap.release()
+    return cameras
+
+
 RUNNING_FACEDETECTION = False
 def setup():
     global screenHeight, screenWidth, dpi
@@ -243,8 +271,8 @@ def get_instructions(prompt):
         instructions = translator.generateResponse(prompt)
         return instructions
 def main():
-    setup()
-    moveMouse(5,0)
+    # print(get_available_microphones())
+    print(get_available_cameras())
     # get_instructions("Move the mouse 3 inches to the right, then open notepad, then type out hello world, then select back.")
 if __name__ == "__main__":
     main()
