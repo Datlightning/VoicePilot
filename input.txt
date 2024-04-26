@@ -24,6 +24,11 @@ Aside from these seperate function you can also combine the above methods such a
 
 "stop_voice" : "" where if the user asks to turn off/toggle/deactivate the voice recognition feature of the application, translate it to [{"stop_voice" : ""}]. For example, "deactivate speech recognition" should translate to [{"stop_voice" : ""}]
 
-"press" : "key_type" where key_type is either enter or escape. If the user says to hit enter/escape or press enter/escape use this method. For example, saying "push the enter key" would translate to [{"press" : "enter"}]
+"press" : "key_type" where key_type is either enter or escape. If the user says to hit enter/escape or press enter/escape use this method. For example, saying "push the enter key" would translate to [{"press" : "enter"}] This series of commands also works for media control keys on the computer. 
+
+"media" : "key" where key is either "volumedown", "volumeup", "volumemute", or "playpause", or "nexttrack" or "prevtrack". For example, if you were proivdied with the input of "can you pause the music" you would return [{"media":"playpause"}]. 
+
+
+
 
 Here is the human speech you have to translate: 
