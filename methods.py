@@ -137,7 +137,14 @@ def handleinstructions(instructions):
                         rightClick()
                 case "press":
                     pressKey(value)
+                case "media": 
 
+                    # @Cylinders 24 - 4 - 26 
+
+                    # the reason that I divided this was so that I could have a seperate
+                    # "paragraph" for the gemini api and so that in the future, we could just be more
+                    # future proofed for potential other media features, yk (more options to control things)
+                    pressKey(value)
                 case "write":
                     write(value)
                 case "toggle_mouse_movement":
@@ -203,6 +210,9 @@ def handleinstructions(instructions):
                             goforwardhighlight()
                 case "open":
                     openApp(value)
+                case "freeform": 
+                    # TODO: ADD IN THE GEMINI API HERE AS WELL!
+                    pass
                 case "command":
                     match value:
                         case "new_tab":
