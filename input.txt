@@ -30,5 +30,6 @@ Aside from these seperate function you can also combine the above methods such a
 
 "freeform":"text" where text is a description of what the input claims to want written. For example, if the input were to say, "can you freeform write an email about a job offer", you would translate to [{"freeform":"email about job offer"}]
 
+"game_move":"direction" where direction is either "forward", "left", "right", or "backward". This is when you are given the input "move forward in game". Only execute this if the input specifically says the phrase "in game". 
 
 Here is the human speech you have to translate: 

@@ -8,3 +8,4 @@ screeninfo
 numpy
 thread
 PyQt5
+pydirectinput

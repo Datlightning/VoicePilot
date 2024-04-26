@@ -4,6 +4,11 @@ import facetrack
 from PyQt5.QtWidgets import QApplication
 import sys
 import translator
+import google.generativeai as genai
+import pydirectinput
+genai.configure(api_key='AIzaSyA4ZmxyxdRFS8F8KEUmfbhJwg5uLAmhQCc')
+
+model = genai.GenerativeModel('gemini-pro')
 # mouseInfo = pg.position()
 # print(mouseInfo)
 
@@ -11,6 +16,11 @@ import translator
 # open app, 
 pg.FAILSAFE = False
 RUNNING_FACEDETECTION = False
+def generateResponse(speech_content):
+    try:
+        return model.generate_content("Write me a " + speech_content + " in english with full logical grammar and punctuation.").text
+    except:
+        return ""
 def setup():
     global screenHeight, screenWidth, dpi
     screenWidth, screenHeight = pg.size() 
@@ -123,10 +133,34 @@ def openApp(name):
     pg.press("enter")
     time.sleep(.2)
 
+def move(direction):
+    match direction: 
+        case "forward":
+            pydirectinput.keyDown('w')
+            time.sleep(.2)
+            pydirectinput.keyUp('w')
+        
+        case "left":
+            pydirectinput.keyDown('a')
+            time.sleep(.2)
+            pydirectinput.keyUp('a')
+            
+        case "right":
+            pydirectinput.keyDown('d')
+            time.sleep(.2)
+            pydirectinput.keyUp('d')
+            
+        case "backward":
+            pydirectinput.keyDown('s')
+            time.sleep(.2)
+            pydirectinput.keyUp('s')
+            
+
 def handleinstructions(instructions):
     global RUNNING_FACEDETECTION
     for dict in instructions:
         for key, value in dict.items():
+            time.sleep(.1)
             match key:
                 case "click":
                     if value == "double":
@@ -208,11 +242,15 @@ def handleinstructions(instructions):
                             gobackhighlight()
                         case "forward":
                             goforwardhighlight()
+                        case "all":
+                            selectall()
                 case "open":
                     openApp(value)
                 case "freeform": 
-                    # TODO: ADD IN THE GEMINI API HERE AS WELL!
+                    pg.typewrite(generateResponse(value))
                     pass
+                case "game_move":
+                    move(value)
                 case "command":
                     match value:
                         case "new_tab":
