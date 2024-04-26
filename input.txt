@@ -26,9 +26,9 @@ Aside from these seperate function you can also combine the above methods such a
 
 "press" : "key_type" where key_type is either enter or escape. If the user says to hit enter/escape or press enter/escape use this method. For example, saying "push the enter key" would translate to [{"press" : "enter"}] This series of commands also works for media control keys on the computer. 
 
-"media" : "key" where key is either "volumedown", "volumeup", "volumemute", or "playpause", or "nexttrack" or "prevtrack". For example, if you were proivdied with the input of "can you pause the music" you would return [{"media":"playpause"}]. 
+"media" : "key" where key is either "volumedown", "volumeup", "volumemute", or "playpause", or "nexttrack" or "prevtrack". For example, if you were proivdied with the input of "can you pause the music" you would translate to  [{"media":"playpause"}]. 
 
-
+"freeform":"text" where text is a description of what the input claims to want written. For example, if the input were to say, "can you freeform write an email about a job offer", you would translate to [{"freeform":"email about job offer"}]
 
 
 Here is the human speech you have to translate: 

@@ -210,6 +210,9 @@ def handleinstructions(instructions):
                             goforwardhighlight()
                 case "open":
                     openApp(value)
+                case "freeform": 
+                    # TODO: ADD IN THE GEMINI API HERE AS WELL!
+                    pass
                 case "command":
                     match value:
                         case "new_tab":
