@@ -3,6 +3,7 @@ import time
 import facetrack
 from PyQt5.QtWidgets import QApplication
 import sys
+import pyaudio
 import translator
 import google.generativeai as genai
 import pydirectinput
@@ -27,6 +28,19 @@ def setup():
     app = QApplication(sys.argv)
     screen = app.screens()[0]
     dpi = screen.physicalDotsPerInch()
+def get_available_microphones():
+    """
+    Function to get a list of available microphones.
+    """
+    p = pyaudio.PyAudio()
+    info = p.get_host_api_info_by_index(0)
+    num_devices = info.get('deviceCount')
+    devices = []
+    for i in range(num_devices):
+        device_info = p.get_device_info_by_host_api_device_index(0, i)
+        devices.append(device_info['name'])
+    p.terminate()
+    return devices
 def startFaceTrack():
     RUNNING_FACEDETECTION = True
     facetrack.start()

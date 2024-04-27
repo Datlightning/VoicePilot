@@ -20,7 +20,7 @@ def displayAndWait(img):
 
 def detect_face(img):
     global target_pos
-    
+    face = False
     img = cv2.flip(img,1)
     face_cascade = cv2.CascadeClassifier(
         cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
@@ -28,6 +28,8 @@ def detect_face(img):
     gray_picture = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # make picture gray
     # find the biggest face on the screen.
     faces = face_cascade.detectMultiScale(gray_picture, 1.3, 5)
+    if len(faces) > 0:
+        face = True
     max_x = 0
     max_y = 0
     big_face = [[0,0], [0,0]]
@@ -43,13 +45,13 @@ def detect_face(img):
         target_pos = ((x + x + w)/2 * .60 + target_pos[0] * .40, (y + y + h)/2 * .60 + target_pos[1] * .40)
     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 255, 0), 2)
 
-    return img
+    return img, face
 
 def getMovement(width: int, height: int) -> tuple:
     return ((target_pos[0]-300) * 5.5 + width//2, (target_pos[1]-272) * 7 + height//2)
 def thread():
     global on
-    cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
+    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
     m = get_monitors()[0]
     screenWidth = m.width
     screenHeight = m.height
@@ -69,7 +71,7 @@ def end():
     global on
     on = False
 def main():
-    cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
+    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
     m = get_monitors()[0]
     screenWidth = m.width
     screenHeight = m.height
@@ -77,10 +79,11 @@ def main():
     while True:
         ret, frame = cap.read()
         # threshold = cv2.getTrackbarPos('threshold', 'my image')
-        face_frame = detect_face(frame)
+        face_frame, face = detect_face(frame)
         cv2.imshow("my image", face_frame)
         # print(getMovement(screenWidth, screenHeight))
-        pyautogui.moveTo(getMovement(screenWidth, screenHeight)[0], getMovement(screenWidth, screenHeight)[1])
+        if face:
+            pyautogui.moveTo(getMovement(screenWidth, screenHeight)[0], getMovement(screenWidth, screenHeight)[1])
 
         # cv2.imshow("my image", face_frame)
         if cv2.waitKey(1) & 0xFF == ord("q"):
