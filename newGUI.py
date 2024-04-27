@@ -13,12 +13,12 @@ app.resizable(width=False, height=False)
 # app.iconbitmap('logo.ico')
 
 # available_microphones = methods.get_available_microphones()
-available_microphones = ["none", "test11", "test12"]
+available_microphones = ["None", "Microphone (Built-In)", "Microphone 1"]
 mic_name = available_microphones[0]
 mic_index = 0
 
 # available_cameras = methods.get_available_cameras()
-available_cameras = ["none", "test21", "test22"]
+available_cameras = ["None", "Webcam", "Camera 1"]
 camera_name = available_cameras[0]
 camera_index = 0
 
@@ -66,10 +66,10 @@ faceSwitch = ctk.CTkSwitch(app, text = "Facial Recognition", command=faceToggleE
 speechSwitchVar = ctk.StringVar(value = "off")
 speechSwitch = ctk.CTkSwitch(app, text = "Speech Recognition", command=speechToggleEvent, variable=speechSwitchVar, onvalue="on", offvalue="off")
 
-cameraMenuVar = ctk.StringVar(value = available_cameras[0])
+cameraMenuVar = ctk.StringVar(value = available_cameras[2])
 cameraMenu = ctk.CTkOptionMenu(app, values = available_cameras, command=cameraOptions, variable=cameraMenuVar)
 
-audioMenuVar = ctk.StringVar(value = available_microphones[0])
+audioMenuVar = ctk.StringVar(value = available_microphones[2])
 audioMenu = ctk.CTkOptionMenu(app, values = available_microphones, command=audioOptions, variable=audioMenuVar)
 
 titleLabel.grid(row = 0, column = 0, padx = 20, pady = (5,2), columnspan = 4)
