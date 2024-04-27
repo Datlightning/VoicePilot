@@ -30,17 +30,17 @@ def exitApp(event):
     
 def faceToggleEvent():
     print(faceSwitchVar.get())
-    # if faceSwitchVar.get() == "on":
-    #     #
-    # else
-    #     #
+    if faceSwitchVar.get() == "on":
+        methods.startFaceTrack()
+    else:
+        methods.pauseFaceTrack()
 
 def speechToggleEvent():
     print(speechSwitchVar.get())
-    # if speechSwitchVar.get() == "on":
-    #     #
-    # else
-    #     #
+    if speechSwitchVar.get() == "on":
+        sr.start()
+    else:
+        sr.end()
     
 def cameraOptions(choice):
     print(choice)
