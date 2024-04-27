@@ -8,7 +8,9 @@ ctk.set_default_color_theme("blue")
 
 app = ctk.CTk()
 app.title("VoicePilot")
-app.geometry("400x190")
+app.geometry("400x190+400+400")
+app.resizable(width=False, height=False)
+# app.iconbitmap('logo.ico')
 
 # available_microphones = methods.get_available_microphones()
 available_microphones = ["none", "test11", "test12"]
