@@ -9,3 +9,4 @@ numpy
 thread
 PyQt5
 pydirectinput
+customtkinter
