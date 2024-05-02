@@ -26,3 +26,5 @@ C:\Users\ogvru\Documents\GitHub\hackmcstXXIV\HackMCSTIX\bin\Debug\net8.0\Microso
 C:\Users\ogvru\Documents\GitHub\hackmcstXXIV\HackMCSTIX\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
 C:\Users\ogvru\Documents\GitHub\hackmcstXXIV\HackMCSTIX\obj\Debug\net8.0\HackMCSTIX.csproj.AssemblyReference.cache
 C:\Users\ogvru\Documents\GitHub\hackmcstXXIV\HackMCSTIX\obj\Debug\net8.0\HackMCSTIX.csproj.Up2Date
+C:\Users\ogvru\Documents\GitHub\hackmcstXXIV\HackMCSTIX\bin\Debug\net8.0\System.Speech.dll
+C:\Users\ogvru\Documents\GitHub\hackmcstXXIV\HackMCSTIX\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Speech.dll
