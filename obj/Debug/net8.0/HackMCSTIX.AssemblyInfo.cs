@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HackMCSTIX")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fcac6ac9df527421ecfeb418e3530b419273b6c9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c8096c67851a975304aa18ee07e27861e876bb7d")]
 [assembly: System.Reflection.AssemblyProductAttribute("HackMCSTIX")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HackMCSTIX")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

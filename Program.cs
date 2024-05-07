@@ -1,45 +1,31 @@
-﻿using System;  
-using System.Speech.Recognition;  
+﻿using Google.Cloud.Speech.V1;
+using System;
 
-namespace SpeechRecognitionApp  
-{  
-  class Program  
-  {  
-    static void Main(string[] args)  
-    {  
+namespace SpeechToTextApiDemo
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("INIT INIT");
+            var speech = SpeechClient.Create();
+            var config = new RecognitionConfig
+            {
+                Encoding = RecognitionConfig.Types.AudioEncoding.Flac,
+                SampleRateHertz = 16000,
+                LanguageCode = LanguageCodes.English.UnitedStates
+            };
+            var audio = RecognitionAudio.FromStorageUri("gs://cloud-samples-tests/speech/brooklyn.flac");         
+            
+            var response = speech.Recognize(config, audio);
 
-      // Create an in-process speech recognizer for the en-US locale.  
-      using (  
-      SpeechRecognitionEngine recognizer =  
-        new SpeechRecognitionEngine(  
-          new System.Globalization.CultureInfo("en-US")))  
-      {  
-
-        // Create and load a dictation grammar.  
-        recognizer.LoadGrammar(new DictationGrammar());  
-
-        // Add a handler for the speech recognized event.  
-        recognizer.SpeechRecognized +=   
-          new EventHandler<SpeechRecognizedEventArgs>(recognizer_SpeechRecognized);  
-
-        // Configure input to the speech recognizer.  
-        recognizer.SetInputToDefaultAudioDevice();  
-
-        // Start asynchronous, continuous speech recognition.  
-        recognizer.RecognizeAsync(RecognizeMode.Multiple);  
-
-        // Keep the console window open.  
-        while (true)  
-        {  
-          Console.ReadLine();  
-        }  
-      }  
-    }  
-
-    // Handle the SpeechRecognized event.  
-    static void recognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)  
-    {  
-      Console.WriteLine("Recognized text: " + e.Result.Text);  
-    }  
-  }  
+            foreach (var result in response.Results)
+            {
+                foreach (var alternative in result.Alternatives)
+                {
+                    Console.WriteLine(alternative.Transcript);
+                }
+            }
+        }
+    }
 }
