@@ -4,6 +4,10 @@
 
 ### PLACEMENT: 1st PLACE HEALTHCARE CATEGORY  
 
+## NEW JERSEY TSA CONFERENCE 2024
+
+### PLACEMENT: 3rd PLACE OVERALL STATE SOFTWARE DEVELOPMENT
+
 Python Application that uses speech recognition, Gemini LLM API and Facial recognition through openCV to allow users to interact with their computer by just moving their face and speaking naturally. 
 
 **KEY FEATURES**
