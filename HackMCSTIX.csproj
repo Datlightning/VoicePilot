@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotnetGeminiSDK" Version="1.0.14" />
     <PackageReference Include="Google.Cloud.Speech.V1" Version="3.7.0" />
+    <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.37.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.4" />
     <PackageReference Include="System.Speech" Version="8.0.0" />
   </ItemGroup>

@@ -43,9 +43,17 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "DotnetGeminiSDK": {
+              "target": "Package",
+              "version": "[1.0.14, )"
+            },
             "Google.Cloud.Speech.V1": {
               "target": "Package",
               "version": "[3.7.0, )"
+            },
+            "Microsoft.CognitiveServices.Speech": {
+              "target": "Package",
+              "version": "[1.37.0, )"
             },
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",

@@ -14,5 +14,6 @@
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)microsoft.entityframeworkcore\8.0.4\buildTransitive\net8.0\Microsoft.EntityFrameworkCore.props" Condition="Exists('$(NuGetPackageRoot)microsoft.entityframeworkcore\8.0.4\buildTransitive\net8.0\Microsoft.EntityFrameworkCore.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.cognitiveservices.speech\1.37.0\build\Microsoft.CognitiveServices.Speech.props" Condition="Exists('$(NuGetPackageRoot)microsoft.cognitiveservices.speech\1.37.0\build\Microsoft.CognitiveServices.Speech.props')" />
   </ImportGroup>
 </Project>
