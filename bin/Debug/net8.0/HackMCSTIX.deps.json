@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v8.0": {
       "HackMCSTIX/1.0.0": {
         "dependencies": {
+          "DotnetGeminiSDK": "1.0.14",
           "Google.Cloud.Speech.V1": "3.7.0",
           "Microsoft.CognitiveServices.Speech": "1.37.0",
           "Microsoft.EntityFrameworkCore.InMemory": "8.0.4",
@@ -15,6 +16,18 @@
         },
         "runtime": {
           "HackMCSTIX.dll": {}
+        }
+      },
+      "DotnetGeminiSDK/1.0.14": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.1/DotnetGeminiSDK.dll": {
+            "assemblyVersion": "1.0.8.0",
+            "fileVersion": "1.0.8.0"
+          }
         }
       },
       "Google.Api.CommonProtos/2.15.0": {
@@ -760,6 +773,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "DotnetGeminiSDK/1.0.14": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JsIhj7WLhWUkhM6NmBKvYBNWnins6jPu7aO6/r02bov/C6DGIB7kBZOoNP+QV3OOWoGcYbaoh71W4IuSiNL0Nw==",
+      "path": "dotnetgeminisdk/1.0.14",
+      "hashPath": "dotnetgeminisdk.1.0.14.nupkg.sha512"
     },
     "Google.Api.CommonProtos/2.15.0": {
       "type": "package",

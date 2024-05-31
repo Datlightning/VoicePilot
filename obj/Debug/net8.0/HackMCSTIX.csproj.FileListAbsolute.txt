@@ -125,3 +125,4 @@ C:\Users\ogvru\Documents\GitHub\hackmcstXXIV\HackMCSTIX\bin\Debug\net8.0\runtime
 C:\Users\ogvru\Documents\GitHub\hackmcstXXIV\HackMCSTIX\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.CognitiveServices.Speech.extension.kws.dll
 C:\Users\ogvru\Documents\GitHub\hackmcstXXIV\HackMCSTIX\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.CognitiveServices.Speech.extension.kws.ort.dll
 C:\Users\ogvru\Documents\GitHub\hackmcstXXIV\HackMCSTIX\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.CognitiveServices.Speech.extension.lu.dll
+C:\Users\ogvru\Documents\GitHub\hackmcstXXIV\HackMCSTIX\bin\Debug\net8.0\DotnetGeminiSDK.dll
