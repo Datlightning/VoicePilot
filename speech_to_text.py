@@ -39,7 +39,7 @@ def recognize(recognizer, microphone):
         with microphone as source:
             if (not skipRecalibrate):
                 recognizer.adjust_for_ambient_noise(source, .5)
-            audio = recognizer.listen(source, 0.5, phrase_time_limit=6)
+            audio = recognizer.listen(source, timeout = 0.5, phrase_time_limit=5.2)
             
     except: 
         skipRecalibrate = True

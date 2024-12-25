@@ -103,15 +103,11 @@ while True:
                 extra = methods.handleinstructions(instructions)
                 print(instructions)
                 if extra == "face_track":
-                    faceSwitchVar = ctk.StringVar(value = "off" if faceSwitchVar.get() == "on" else "on")
-                    faceSwitch.toggle()
-                    faceToggleEvent()
-                # displayEmptySource("")
+                    faceSwitch.toggle()    
             else:
                 print(data["error"])
-                # displayEmptySource(data["error"])
                 pass
     app.update_idletasks()
     app.update()
-
+ 
 
