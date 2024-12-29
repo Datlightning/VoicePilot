@@ -45,12 +45,10 @@ def recognize(recognizer, microphone):
         response["transcription"] = recognizer.recognize_google(audio)
     except sr.RequestError:
         # API was unreachable or unresponsive
-        print("network error")
         response["success"] = False
         response["error"] = "API unavailable"
     except sr.UnknownValueError:
         # speech was unintelligible
-        print("could not understand what you were saying fool")
         response["error"] = "Unable to recognize speech"
     
     return response["transcription"].lower()
@@ -68,7 +66,6 @@ def rec():
     
     # show instructions and wait 3 seconds before starting the game
     currentPhrase = []
-    print("currently recognizing")
     run = True
     while run:  
         name = "command"
@@ -113,9 +110,9 @@ def rec():
                 run = False 
                 
             else: 
-                print("second command not found") 
+               pass
         else: 
-            print("first command not found") 
+            pass
         currentPhrase = []
             
         
